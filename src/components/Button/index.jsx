@@ -1,33 +1,42 @@
-import { ButtonContainer } from "./styles";
+import { ButtonContainer, DoubleButton } from "./styles";
 
 const Button = ({ label, onClick }) => {
-  let labelColor;
-  
+  let labelColor, backColor;
+
   switch (label) {
     case "+":
-    case "-":
-    case "x":
-    case "/":
-      labelColor = "orange";
+    case "−":
+    case "×":
+    case "÷":
+      backColor = "#fc9526";
+      labelColor = "white";
       break;
-    case "C":
-      labelColor = "red";
-      break;
-    case "=":
-      labelColor = "green";
-      break;
-    case "±":
-      labelColor = "blue";
+    case "AC":
+    case "%":
+    case "+/−":
+      backColor = "#a5a5a5";
+      labelColor = "black";
       break;
     default:
+      backColor = "#333333";
       labelColor = "white";
   }
 
+  if (label === "0") {
+    return (
+      <DoubleButton style={{
+        color: labelColor,
+        backgroundColor: backColor,
+      }} onClick={onClick}>{label}
+      </DoubleButton>
+    );
+  }
+
   return (
-    <ButtonContainer>
-      <button style={{
-        color: labelColor
-      }} onClick={onClick}>{label}</button>
+    <ButtonContainer style={{
+      color: labelColor,
+      backgroundColor: backColor,
+    }} onClick={onClick}>{label}
     </ButtonContainer>
   );
 }

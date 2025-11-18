@@ -1,24 +1,23 @@
 import styled from "styled-components";
 
-export const ButtonContainer = styled.div`
+export const BaseButton = styled.button`
+    width: 100%;
+    min-width: 48px;
     border: none;
-    background-color: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    button {
-        width: 100%;
-        min-width: 48px;
-        height: 64px;
-        border: none;
-        background: none;
-        color: white;
-        font-size: 32px;
-        font-weight: bold;
-    }
+    background: none;
+    font-size: 2.5rem;
 
     &:hover {
-        background-color: #111;
+        filter: brightness(0.8);
     }
+`;
+
+export const ButtonContainer = styled(BaseButton)`
+    aspect-ratio: 1;
+    border-radius: 50%;
+`;
+
+export const DoubleButton = styled(BaseButton)`
+    grid-column: span 2;
+    border-radius: 50px;
 `;

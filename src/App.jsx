@@ -1,13 +1,14 @@
 import { useState } from 'react';
 
-import { Container, Content, ButtonsGrid, Row } from './styles';
+import { Container, Content, ButtonsGrid } from './styles';
 import GlobalStyle from './global';
 
 import Input from './components/Input';
 import Button from './components/Button';
 
 const App = () => {
-  const buttons = "789+456-123/±0.x";
+  const buttons = ["AC", "+/−", "%", "÷", "7", "8", "9", "×", "4", "5", "6", "−", "1", "2", "3", "+", "0", ".", "="];
+
 
   const [currentValue, setCurrentValue] = useState("0");
   const [firstNumber, setFirstNumber] = useState(null);
@@ -23,14 +24,17 @@ const App = () => {
           case "+":
             result = firstNumber + secondNumber;
             break;
-          case "-":
+          case "−":
             result = firstNumber - secondNumber;
             break;
-          case "x":
+          case "×":
             result = firstNumber * secondNumber;
             break;
-          case "/":
+          case "÷":
             result = firstNumber / secondNumber;
+            break;
+          case "%":
+            result = firstNumber / 100 * secondNumber;
             break;
           default:
             return;
@@ -44,16 +48,20 @@ const App = () => {
         setFirstNumber(null);
         setOperation(null);
       }
-    } else if (value === "C") {
+    } else if (value === "AC") {
       setCurrentValue("0");
       setFirstNumber(null);
       setOperation(null);
-    } else if (value === "±") {
+    } else if (value === "+/−") {
       setCurrentValue((prev) =>
-        prev.charAt(0) === "-" ? prev.slice(1) : "-" + prev
+        prev.charAt(0) === "−" ? prev.slice(1) : "−" + prev
+      );
+    } else if (value === ".") {
+      setCurrentValue((prev) =>
+        prev.includes(".") ? prev : prev + "."
       );
     } else {
-      if (["+", "-", "x", "/"].includes(value)) {
+      if (["+", "−", "×", "÷", "%"].includes(value)) {
         setFirstNumber(parseFloat(currentValue));
         setOperation(value);
         setCurrentValue("0");
@@ -67,19 +75,9 @@ const App = () => {
       <GlobalStyle />
       <Container>
         <Content>
-          <Row>
-            <Button
-              label="C"
-              onClick={() => handleButtonClick("C")}
-            />
-            <Input value={currentValue} />
-            <Button
-              label="="
-              onClick={() => handleButtonClick("=")}
-            />
-          </Row>
+          <Input value={currentValue} />
           <ButtonsGrid>
-            {buttons.split("").map((label, index) => {
+            {buttons.map((label, index) => {
               return (
                 <Button
                   key={index}
