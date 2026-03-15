@@ -24,21 +24,29 @@ const Button = ({ label, onClick }) => {
 
   if (label === "0") {
     return (
-      <DoubleButton style={{
-        color: labelColor,
-        backgroundColor: backColor,
-      }} onClick={onClick}>{label}
+      <DoubleButton
+        style={{
+          color: labelColor,
+          backgroundColor: backColor,
+        }}
+        onClick={onClick}
+      >
+        {label}
       </DoubleButton>
     );
   }
 
   return (
-    <ButtonContainer style={{
-      color: labelColor,
-      backgroundColor: backColor,
-    }} onClick={onClick}>{label}
+    <ButtonContainer
+      style={{
+        color: labelColor,
+        backgroundColor: backColor,
+      }}
+      onClick={onClick}
+    >
+      {label}
     </ButtonContainer>
   );
-}
+};
 
 export default Button;
