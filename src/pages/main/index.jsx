@@ -32,10 +32,16 @@ const Main = () => {
   const [firstNumber, setFirstNumber] = useState(null);
   const [operation, setOperation] = useState(null);
 
+  const [previewFirstNumber, setPreviewFirstNumber] = useState(null);
+  const [previewSecondNumber, setPreviewSecondNumber] = useState(null);
+  const [previewOperation, setPreviewOperation] = useState(null);
+
   const handleButtonClick = (value) => {
+    if (firstNumber == null) setPreviewSecondNumber(null);
     if (value === "=") {
       if (firstNumber !== null && operation !== null) {
         const secondNumber = parseFloat(currentValue);
+        setPreviewSecondNumber(secondNumber);
         let result;
 
         switch (operation) {
@@ -70,6 +76,10 @@ const Main = () => {
       setCurrentValue("0");
       setFirstNumber(null);
       setOperation(null);
+
+      setPreviewFirstNumber(null);
+      setPreviewSecondNumber(null);
+      setPreviewOperation(null);
     } else if (value === "+/−") {
       setCurrentValue((prev) =>
         prev.charAt(0) === "−" ? prev.slice(1) : "−" + prev,
@@ -81,6 +91,9 @@ const Main = () => {
         setFirstNumber(parseFloat(currentValue));
         setOperation(value);
         setCurrentValue("0");
+
+        setPreviewFirstNumber(parseFloat(currentValue));
+        setPreviewOperation(value);
       } else {
         setCurrentValue((prev) => (prev === "0" ? value : prev + value));
       }
@@ -90,7 +103,12 @@ const Main = () => {
     <>
       <Container>
         <Content>
-          <Input value={currentValue} />
+          <Input
+            value={currentValue}
+            firstNumber={previewFirstNumber}
+            operation={previewOperation}
+            secondNumber={previewSecondNumber}
+          />
           <ButtonsGrid>
             {buttons.map((label, index) => {
               return (

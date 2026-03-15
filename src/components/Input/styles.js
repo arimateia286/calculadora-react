@@ -1,26 +1,25 @@
 import styled from "styled-components";
 
 export const InputContainer = styled.div`
-    display: flex;
-    align-items: end;
-    flex-grow: 0.5;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: end;
+  flex: 0.9;
+  border-bottom: 2px solid gray;
+  margin: 20px;
 
-    input {
-        background: none;
-        border: none;
-        width: 100%;
-        padding: 4rem 20px;
-        text-align: right;
-        font-size: 6rem;
-        color: white;
-    }
+  p {
+    font-size: 1.5rem;
+    color: gray;
+  }
 
-    @media(min-width: 768px) {
-        flex-grow: 0;
-        height: 150px;
-
-        input {
-            padding: 2rem 20px;
-        }
-    }
+  input {
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: right;
+    font-size: 5rem;
+    color: white;
+  }
 `;
